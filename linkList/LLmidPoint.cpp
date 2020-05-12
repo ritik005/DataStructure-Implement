@@ -17,6 +17,18 @@ void insertAtHead (node* &head, int data){
     n->next = head;
     head = n;
 }
+// Using Runner technique - Important
+node* midpoint(node* head){
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+    node*S = head, *F = head->next;
+    while(F!=NULL && F->next!=NULL){
+        F = F->next->next;
+        S = S->next;
+    }
+    return S;
+}
 void print(node*head) {
     node*temp = head;
     while(temp!=NULL){
@@ -24,44 +36,15 @@ void print(node*head) {
         temp = temp->next;
     }
 }
-bool searchRecursive(node* &head, int key){
-    if(head == NULL) {
-        return false;
-    }
-    else if(head->data == key){
-        return true;
-    }
-    else {
-        return searchRecursive(head->next, key);
-    }
-}
-bool searchLiner(node* &head, int key){
-    while(head!=NULL){
-        if(head->data == key){
-            return true;
-        }
-        head = head->next;
-    }
-    return false;
-}
-
-int main() {
+int main(){
     node* head = NULL;
     insertAtHead(head, 1);
     insertAtHead(head, 2);
     insertAtHead(head, 3);
     insertAtHead(head, 4);
-    if(searchRecursive(head, 4)){
-        cout << "Element is Present";
-    }
-    else {
-        cout << "Not present";
-    }
-    if(searchLiner(head, 7)){
-        cout << "Element is present";
-    }
-    else {
-        cout << "Not present";
-    }
+    insertAtHead(head, 5);
+    print(head);
+    node*m = midpoint(head);
+    cout << m->data;
     return 0;
 }
