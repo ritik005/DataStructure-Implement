@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 
+// Divide and Conquer algorithm
 void merge(int* arr, int s, int e, int mid){
     int i = s;
     int j = mid+1;
