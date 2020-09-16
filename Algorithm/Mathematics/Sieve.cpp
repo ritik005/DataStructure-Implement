@@ -1,6 +1,7 @@
 #include<iostream>
 #define N 1000001
 using namespace std;
+// Sieve of Eratosthenes :- used to find prime numbers in the given range;
 
 int arr[N];
 
