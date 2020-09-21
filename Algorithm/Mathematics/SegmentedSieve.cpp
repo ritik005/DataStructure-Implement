@@ -27,7 +27,10 @@ vector<int>* sieve(){
     }
     return primes;
 }
-
+/*
+This functions print primes in the range from l to r 
+using segment sieve
+*/
 void printPrimes(ll l, ll r, vector<int>* &primes){
     bool isPrime[r-l+1];
     for(int i = 0; i <= r-l; i++){
@@ -35,6 +38,7 @@ void printPrimes(ll l, ll r, vector<int>* &primes){
     }
     for(int i = 0; primes->at(i)*(ll)primes->at(i) <= r; i++){
         int curPrime = primes->at(i);
+        // Just smaller or equal element to l
         ll base = ((l/curPrime)*curPrime);
         if(base < l){
             base += curPrime;
