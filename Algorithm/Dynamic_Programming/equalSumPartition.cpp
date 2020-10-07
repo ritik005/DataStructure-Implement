@@ -5,7 +5,7 @@ int Dp[10001][10001];
 Find wheather an array can be divided into 
 to parts such that sum of each section is equal
 */
-bool TargetSum(int arr[], int sum, int n) {
+bool equalSumPartition(int arr[], int sum, int n) {
     if(sum & 1) return false;
     //Initialization
     for(int i = 0; i < n+1; i++){
@@ -36,5 +36,5 @@ int main() {
         cin >> arr[i];
         sum += arr[i];
     }
-    cout << TargetSum(arr,sum,n);
+    cout << equalSumPartition(arr,sum,n);
 }
