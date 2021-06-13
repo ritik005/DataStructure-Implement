@@ -7,14 +7,13 @@ void addEdge(map<int,vector<int> > &m, int u, int v, bool bidirected=true){
 };
 
 void print(map<int,vector<int> > m){
-
  for(auto x : m){
-  cout << x.first <<"->";
-  for(auto neighbour : x.second){
+    cout << x.first <<"->";
+    for(auto neighbour : x.second){
       cout << neighbour << ",";
-  }
- cout << endl;
- }
+    }
+    cout << endl;
+    }
 };
 
 
