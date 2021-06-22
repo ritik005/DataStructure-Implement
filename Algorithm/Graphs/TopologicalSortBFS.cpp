@@ -1,43 +1,52 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 template<typename T>
 class Graph{
     map<T,list<T>> adjList;
-    public: 
+    public:
     void addEdge(T u, T v){
         adjList[u].push_back(v);
     }
-    void dfsHelper(map<T,bool> &visited, stack<T> &s, T node){
-        visited[node] = true;
+    void topoBFS(){
+        map<T,int> indegree;
+        queue<T> q;
 
-        for(auto neighbour : adjList[node]){
-            if(!visited[neighbour]){
-                dfsHelper(visited,s,neighbour);
-            }
-        }
-        // At this point all the neighbour of node is visited then push it to the stack
-        s.push(node);
-    }
-    void print(stack<T> s){
-        while(!s.empty()){
-            cout << s.top() << "->";
-            s.pop();
-        }
-    }
-    void topologicalSort(){
-        map<T,bool> visited;
-        stack<T> s;
+        // initialize 0 to all the indegree of a nodes
         for(auto i : adjList){
-            if(!visited[i.first]){
-                dfsHelper(visited,s,i.first);
+            T node = i.first;
+            indegree[node] = 0;
+        }
+        //Calculating indegree of each node;
+        for(auto i : adjList){
+            T node = i.first;
+            for(auto neighbour : adjList[node]){
+                indegree[neighbour]++;
             }
         }
-        print(s);
+        // Push all the node with 0 indegree in the queue
+        for(auto i : adjList){
+            T node = i.first;
+            if(indegree[node] == 0){
+                q.push(node);
+            }
+        }
+
+        while(!q.empty()){
+            T node = q.front();
+            q.pop();
+            cout << node << "->";
+            for(auto i : adjList[node]){
+                indegree[i]--;
+                if(indegree[i]==0){
+                    q.push(i);
+                }
+            }
+        }
+        
     }
 };
 
-int main() {
+int main(){
     Graph<int> g;
     g.addEdge(0,1);
     g.addEdge(0,4);
@@ -46,9 +55,6 @@ int main() {
     g.addEdge(4,3);
     g.addEdge(2,3);
     g.addEdge(3,5);
+    g.topoBFS();
 
-    g.topologicalSort();
-
-
-    return 0;
 }
